@@ -1,0 +1,2 @@
+- Add more security features to the connection so that the server / machine can identify that each other are the ones that are really sending the message
+- Work on creating the api

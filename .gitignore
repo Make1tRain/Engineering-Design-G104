@@ -1,2 +1,4 @@
 /src/machine/keys
 /src/server/keys
+/src/server/test.py
+/scr/server/__pycache__

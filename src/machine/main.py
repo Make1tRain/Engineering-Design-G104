@@ -9,6 +9,7 @@ there is only write function and no listen function
 # CONSTANTS 
 SERVER_IP = "" 
 PORT = 5555 # random 
+machine_id = "A2D2Z9g58esfsGwtcJysNxwR" 
 
 with open("keys/_serverPubKey.txt","r") as file:
     SERVER_PUBLIC_KEY = rsa.PublicKey.load_pkcs1(file.read())
@@ -21,8 +22,8 @@ with open("keys/_publicKey.txt","r") as file:
 client = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
 client.connect((SERVER_IP, PORT ))
 
-def write(message): # message is the barcode (number on it )
-    client.send(rsa.encrypt(message, SERVER_PUBLIC_KEY))
+def write(message:str): # message is the barcode (number on it )
+    client.send(rsa.encrypt(message.encode(), SERVER_PUBLIC_KEY))
 
 def open_glass():
     pass  
