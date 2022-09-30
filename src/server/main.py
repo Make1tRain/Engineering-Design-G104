@@ -36,7 +36,11 @@ def handle_client(conn):
             data = json.loads(file.read())
         
         if bool(data["response"]) == True: 
-            conn.send(data["material"]) # plastic, carton or aaaaa
+            conn.send(data["material"]) # plastic, carton or 
+
+        with open("data.json","w") as file: 
+            data = json.dumps({"response":"False", "material":""})
+            file.write(data)
 
     
 
