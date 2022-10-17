@@ -1,5 +1,4 @@
-import socket, threading, rsa, json 
-
+import socket, json 
 """ 
 We only need to send data to the server so, 
 there is only write function and no listen function 
@@ -11,19 +10,20 @@ SERVER_IP = ""
 PORT = 5555 # random 
 machine_id = "A2D2Z9g58esfsGwtcJysNxwR" 
 
-with open("keys/_serverPubKey.txt","r") as file:
-    SERVER_PUBLIC_KEY = rsa.PublicKey.load_pkcs1(file.read())
-with open("keys/_privateKey.txt","r") as file:
-    PRIV_KEY = rsa.PrivateKey.load_pkcs1(file.read())
-with open("keys/_publicKey.txt","r") as file:
-    PUB_KEY = rsa.PublicKey.load_pkcs1(file.read())
+# import rsa
+# with open("keys/_serverPubKey.txt","r") as file:
+#     SERVER_PUBLIC_KEY = rsa.PublicKey.load_pkcs1(file.read())
+# with open("keys/_privateKey.txt","r") as file:
+#     PRIV_KEY = rsa.PrivateKey.load_pkcs1(file.read())
+# with open("keys/_publicKey.txt","r") as file:
+#     PUB_KEY = rsa.PublicKey.load_pkcs1(file.read())
+# def write(message:str): # message is the barcode (number on it )
+#     client.send(rsa.encrypt(message.encode(), SERVER_PUBLIC_KEY))
 
 
 client = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
 client.connect((SERVER_IP, PORT ))
 
-def write(message:str): # message is the barcode (number on it )
-    client.send(rsa.encrypt(message.encode(), SERVER_PUBLIC_KEY))
 
 def open_glass():
     pass  
@@ -54,3 +54,5 @@ def main():
             shutdown() 
         else:
             error()
+
+main()

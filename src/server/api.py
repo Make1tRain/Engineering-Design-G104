@@ -26,4 +26,4 @@ async def get_product_type(barcode: str):
     with open("data.json", "w") as file: 
        file.write(json.dumps({"response":"True", "type":itemType}))
 
-    return {"type": itemType}
+    return json.dumps({"type": itemType})

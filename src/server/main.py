@@ -4,18 +4,18 @@ import utils
 
 # CONSTANTS 
 # SERVER KEYS 
-with open("keys/_privatekey.txt", "r") as file:
-    SERVER_PRIV_KEY = rsa.PrivateKey.load_pkcs1((file.read().encode()))
-with open("keys/_publicKey.txt", "r") as file:
-    SERVER_PUBLIC_KEY = rsa.PublicKey.load_pkcs1((file.read().encode()))
+# with open("keys/_privatekey.txt", "r") as file:
+#     SERVER_PRIV_KEY = rsa.PrivateKey.load_pkcs1((file.read().encode()))
+# with open("keys/_publicKey.txt", "r") as file:
+#     SERVER_PUBLIC_KEY = rsa.PublicKey.load_pkcs1((file.read().encode()))
 
 # MACHINE PUBLIC KEYS 
-importedKeyID = os.listdir("./keys/bin_keys")
-importedKeys = []
-for a in importedKeyID: 
-    with open(f"keys/bin_keys/{a}") as file: 
-        importedKeys.append(rsa.PublicKey.load_pkcs1((file.read().encode())))
-keys = list(zip([a[:-4] for a in importedKeyID], importedKeys))
+# importedKeyID = os.listdir("./keys/bin_keys")
+# importedKeys = []
+# for a in importedKeyID: 
+#     with open(f"keys/bin_keys/{a}") as file: 
+#         importedKeys.append(rsa.PublicKey.load_pkcs1((file.read().encode())))
+# keys = list(zip([a[:-4] for a in importedKeyID], importedKeys))
 
 # CREATION OF THE SERVER (LISTENER)
 SERVER_IP = "localhost" # localhost for testing purposes 
@@ -52,7 +52,7 @@ def main():
     
     print("[i] Connection Made")
 
-    data = rsa.decrypt(conn.recv(1024),SERVER_PRIV_KEY)
+    data = conn.recv(1024)
 
     # the machine will send its id in the first message 
     if data[0:2] == "id": 
