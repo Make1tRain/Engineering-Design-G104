@@ -11,4 +11,4 @@ def create_database(db_name:str, xlsx_relative_path:str) -> None:
     df = pd.read_excel(xlsx_relative_path)
     df.to_sql("products",conn, if_exists='replace', index=False)
 
-# create_database("database","data.xlsx")
+create_database("database","data.xlsx")
