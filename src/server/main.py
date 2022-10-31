@@ -1,8 +1,8 @@
 import  socket, json
 
 # CREATION OF THE SERVER (LISTENER)
-SERVER_IP = "192.168.0.100" # localhost for testing purposes 
-PORT = 4444
+SERVER_IP = socket.gethostbyname(socket.gethostname())  # localhost for testing purposes 
+PORT = 5555
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((SERVER_IP,PORT))
 
@@ -16,7 +16,7 @@ def handle_client(conn):
             raw_data = file.read()
             if type(raw_data) != str:
                 raw_data.decode()
-            data = json.loads()
+            data = json.loads(raw_data)
         
         if bool(data["response"]) == True: 
             print("sent")

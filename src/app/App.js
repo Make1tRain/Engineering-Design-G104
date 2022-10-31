@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -18,12 +19,16 @@ import BarcodeMask from "react-native-barcode-mask";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const get = require("./functions.js")
-const ip = "192.168.0.100"
-const port = "8000"
-
 const { width } = Dimensions.get("window");
 const Stack = createNativeStackNavigator();
+
+const ip = "172.20.10.2" // this should be changed to the local ip address 
+const port = "8000"
+
+const main_request = (ip, port, barcode) => {
+  Axios.get(`http://${ip}:${port}/products/${barcode}`).then((response)=>{console.log(response)})
+}
+
 
 function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -38,8 +43,8 @@ function ScannerScreen({ navigation }) {
 
   const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
-    get.get(ip, port, data)
-    // alert(`Bar code ${data} has been scanned!`);
+    main_request(ip, port, data)
+    alert(`Bar code ${data} has been scanned!`);
   };
 
   return (
@@ -116,19 +121,19 @@ function ManualOpeningScreen({ navigation }) {
       <View styles={styles.openDiv}>
         <Text style={styles.openDiv.text}>Open Manually</Text>
         <View style={styles.openDiv.buttons}>
-          <TouchableOpacity onPress={() => get.get(ip, port, "0000000000001")}>
+          <TouchableOpacity onPress={() => main_request(ip, port, "0000000000003")}>
             <Image
               style={styles.openDiv.buttons.image}
               source={require("./assets/manual/OGB.png")}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => get.get(ip, port, "0000000000002")}>
+          <TouchableOpacity onPress={() => main_request(ip, port, "0000000000001")}>
             <Image
               style={styles.openDiv.buttons.image}
               source={require("./assets/manual/OPMDB.png")}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => get.get(ip, port, "0000000000003")}>
+          <TouchableOpacity onPress={() => main_request(ip, port, "0000000000002")}>
             <Image
               style={styles.openDiv.buttons.image}
               source={require("./assets/manual/OPB.png")}
